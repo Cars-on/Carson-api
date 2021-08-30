@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  app:
+    image: node:14.17.1-alpine3.13
+    container_name: carson_app
+    restart: always
+    command: npm run dev
+    working_dir: /app
+    volumes: 
+      - ./:/app
+    ports:
+      - 3333:3333
+    depends_on: 
+      - mongo_db
+    network_mode: host
+
+  mongo_db:
+    image: mongo
+    command: [--auth]
+    container_name: carson_mongo
+    restart: always
+    volumes:
+      - ./.docker/mongo/data/:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=carson_app
+    network_mode: host
