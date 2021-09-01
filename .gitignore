@@ -2,3 +2,4 @@ node_modules/
 .docker/
 .vscode/
 ormconfig.js
+.env
