@@ -6,14 +6,14 @@ enum UserRoles {
 }
 interface IUser {
   id: ObjectId;
-  name: string;
-  user_name: string;
-  password: string;
   cnpj: string;
   cpf: string;
+  name: string;
+  user_name: string;
   email: string;
   phone: string;
   address: string;
+  password: string;
   first_access: boolean;
   role?: UserRoles;
 }

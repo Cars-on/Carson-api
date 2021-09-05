@@ -1,5 +1,7 @@
 import { ObjectId } from 'mongodb';
 
+import crypto from 'crypto';
+
 import {
   ObjectIdColumn,
   Column,
@@ -54,10 +56,7 @@ class User implements IUser {
 
   @BeforeInsert()
   beforeInsertActions?(): void {
-    const newPassord = Math.floor(
-      Math.random() * (9999999999999999 - 1000000000000000 + 1) +
-        1000000000000000,
-    );
+    const newPassord = crypto.randomBytes(3).toString('hex');
     if (!this.password) this.password = newPassord.toString();
     if (!this.role) this.role = UserRoles.USER;
     if (!this.first_access) this.first_access = true;

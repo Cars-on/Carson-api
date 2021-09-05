@@ -1,7 +1,5 @@
 import { createConnection } from 'typeorm';
 
-console.log('teste');
-
 // eslint-disable-next-line no-unused-expressions
 (async () => {
   createConnection()
