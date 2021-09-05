@@ -42,7 +42,8 @@
         "argsIgnorePattern": "_"
       }
     ],
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-shadow": "off"
   },
   "settings": {
     "import/resolver": {

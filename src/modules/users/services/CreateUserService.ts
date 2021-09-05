@@ -1,19 +1,31 @@
+/* eslint-disable no-useless-constructor */
+import 'reflect-metadata';
+
 import fs from 'fs';
 import csvParse from 'csv-parse';
+import { inject, injectable } from 'tsyringe';
 
+import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
+// import { ICreateUserDTO } from '../dtos/ICreateUserDTO';
+// import { IUser } from '../schema/IUser';
+
+@injectable()
 class CreateUserService {
-  public async execute(file: Express.Multer.File | undefined): Promise<void> {
-    if (file) {
-      const stream = fs.createReadStream(file.path);
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
 
-      const parseFile = csvParse();
+  public async execute(file: Express.Multer.File): Promise<void> {
+    const stream = fs.createReadStream(file.path);
 
-      stream.pipe(parseFile);
+    const parseFile = csvParse();
 
-      parseFile.on('data', async line => {
-        console.log(line);
-      });
-    }
+    stream.pipe(parseFile);
+
+    parseFile.on('data', async line => {
+      console.log(line);
+    });
   }
 }
 

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { UsersController } from '@modules/users/infra/controllers/UsersController';
+import { UsersController } from '@modules/users/infra/http/controllers/UsersController';
 
 const userRoutes = Router();
 

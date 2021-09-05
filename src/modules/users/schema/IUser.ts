@@ -1,5 +1,9 @@
 import { ObjectId } from 'mongodb';
 
+enum UserRoles {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
 interface IUser {
   id: ObjectId;
   name: string;
@@ -11,6 +15,7 @@ interface IUser {
   phone: string;
   address: string;
   first_access: boolean;
+  role?: UserRoles;
 }
 
-export { IUser };
+export { IUser, UserRoles };

@@ -9,10 +9,10 @@ import {
   BeforeInsert,
 } from 'typeorm';
 
-import { IUser } from '@modules/users/schema/IUser';
+import { IUser, UserRoles } from '@modules/users/schema/IUser';
 
 @Entity('users')
-class Users implements IUser {
+class User implements IUser {
   @ObjectIdColumn()
   id: ObjectId;
 
@@ -43,6 +43,9 @@ class Users implements IUser {
   @Column('boolean', { default: true })
   first_access: boolean;
 
+  @Column('enum', { enum: UserRoles, default: UserRoles.USER })
+  role: UserRoles | undefined;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -56,7 +59,9 @@ class Users implements IUser {
         1000000000000000,
     );
     if (!this.password) this.password = newPassord.toString();
+    if (!this.role) this.role = UserRoles.USER;
+    if (!this.first_access) this.first_access = true;
   }
 }
 
-export { Users };
+export { User };
