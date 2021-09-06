@@ -12,6 +12,14 @@ class UsersRepository implements IUsersRepository {
 
     return newUser;
   }
+
+  public async findByDocument(document: string): Promise<User | undefined> {
+    const usersRepo = getConnection().getMongoRepository(User);
+
+    const findUser = usersRepo.findOne(document);
+
+    return findUser;
+  }
 }
 
 export { UsersRepository };
