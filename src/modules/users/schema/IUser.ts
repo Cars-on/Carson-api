@@ -16,6 +16,7 @@ interface IUser {
   password: string;
   first_access: boolean;
   role?: UserRoles;
+  lot: string;
 }
 
 export { IUser, UserRoles };
