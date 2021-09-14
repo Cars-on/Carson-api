@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 import * as Yup from 'yup';
 
 class VerifyParams {

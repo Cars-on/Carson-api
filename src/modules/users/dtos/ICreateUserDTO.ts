@@ -12,4 +12,5 @@ export interface ICreateUserDTO {
   password?: string;
   first_access?: boolean;
   role?: UserRoles;
+  lot?: string;
 }

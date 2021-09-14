@@ -14,9 +14,12 @@ class UsersController {
     }
 
     const createUserService = container.resolve(CreateUserService);
-    await createUserService.execute(file);
+    const lot = await createUserService.execute(file);
 
-    return response.json({ message: 'CSV com usuários inserido com sucesso' });
+    return response.json({
+      message: 'CSV com usuários inserido com sucesso',
+      lot,
+    });
   }
 }
 

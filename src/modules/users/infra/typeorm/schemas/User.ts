@@ -48,6 +48,9 @@ class User implements IUser {
   @Column('enum', { enum: UserRoles, default: UserRoles.USER })
   role: UserRoles | undefined;
 
+  @Column('varchar')
+  lot: string;
+
   @CreateDateColumn()
   created_at: Date;
 

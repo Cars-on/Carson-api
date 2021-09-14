@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-interface IUserLog {
+interface IUserLogs {
   id: ObjectId;
   cnpj?: string;
   cpf?: string;
@@ -9,8 +9,9 @@ interface IUserLog {
   email?: string;
   phone?: string;
   address?: string;
-  error: string;
+  error: string[];
   line: number;
+  lot: string;
 }
 
-export { IUserLog };
+export { IUserLogs };

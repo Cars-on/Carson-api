@@ -1,9 +1,9 @@
-/* eslint-disable no-useless-constructor */
 import 'reflect-metadata';
 
 import fs from 'fs';
 import csvParse from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
+import crypto from 'crypto';
 
 import { VerifyParams } from '@modules/users/infra/validation/usersValidation';
 
@@ -55,8 +55,10 @@ class CreateUserService {
     });
   }
 
-  async execute(file: Express.Multer.File): Promise<void> {
+  async execute(file: Express.Multer.File): Promise<string> {
     const users = await this.saveUsers(file);
+
+    const lot = crypto.randomBytes(3).toString('hex');
 
     users.map(async (item, index) => {
       if (index !== 0) {
@@ -64,7 +66,11 @@ class CreateUserService {
         const errors = await verifyParams.execute(item);
 
         if (errors) {
-          Object.assign(item, { error: errors, line: index + 1 });
+          Object.assign(item, {
+            error: errors,
+            line: index + 1,
+            lot,
+          });
           await this.usersLogRepository.create(item);
           return;
         }
@@ -77,9 +83,12 @@ class CreateUserService {
           email,
           phone,
           address,
+          lot,
         });
       }
     });
+
+    return lot;
   }
 }
 

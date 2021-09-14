@@ -8,10 +8,10 @@ import {
   Entity,
 } from 'typeorm';
 
-import { IUserLog } from '@modules/users/schema/IUserLogs';
+import { IUserLogs } from '@modules/users/schema/IUserLogs';
 
 @Entity('user_logs')
-class UserLog implements IUserLog {
+class UserLog implements IUserLogs {
   @ObjectIdColumn()
   id: ObjectId;
 
@@ -37,10 +37,13 @@ class UserLog implements IUserLog {
   address: string;
 
   @Column('varchar')
-  error: string;
+  error: string[];
 
   @Column('number')
   line: number;
+
+  @Column('varchar')
+  lot: string;
 
   @CreateDateColumn()
   created_at: Date;
