@@ -42,6 +42,9 @@ class User implements IUser {
   @Column('varchar')
   address: string;
 
+  @Column('varchar')
+  state: string;
+
   @Column('boolean', { default: true })
   first_access: boolean;
 

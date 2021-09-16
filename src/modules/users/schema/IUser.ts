@@ -13,6 +13,7 @@ interface IUser {
   email: string;
   phone: string;
   address: string;
+  state: string;
   password: string;
   first_access: boolean;
   role?: UserRoles;

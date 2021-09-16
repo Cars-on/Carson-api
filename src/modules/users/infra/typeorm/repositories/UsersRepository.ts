@@ -1,4 +1,4 @@
-import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { IUser } from '@modules/users/schema/IUser';
 import { getConnection, getMongoRepository, MongoRepository } from 'typeorm';
@@ -19,7 +19,7 @@ class UsersRepository implements IUsersRepository {
     return users;
   }
 
-  public async create(datas: ICreateUserDTO): Promise<User> {
+  public async create(datas: ICreateUsersDTO): Promise<User> {
     const newUsers = this.logsRepository.create(datas);
 
     await this.logsRepository.save(newUsers);
