@@ -37,6 +37,9 @@ class UserLog implements IUserLogs {
   address: string;
 
   @Column('varchar')
+  state: string;
+
+  @Column('varchar')
   error: string[];
 
   @Column('number')

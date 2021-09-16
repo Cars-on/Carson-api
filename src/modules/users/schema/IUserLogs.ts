@@ -9,6 +9,7 @@ interface IUserLogs {
   email?: string;
   phone?: string;
   address?: string;
+  state?: string;
   error: string[];
   line: number;
   lot: string;

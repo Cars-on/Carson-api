@@ -1,6 +1,6 @@
 import { UserRoles } from '@modules/users/schema/IUser';
 
-export interface ICreateUserDTO {
+export interface ICreateUsersDTO {
   cnpj: string;
   cpf: string;
   name: string;
@@ -8,6 +8,7 @@ export interface ICreateUserDTO {
   email: string;
   phone: string;
   address: string;
+  state: string;
 
   password?: string;
   first_access?: boolean;

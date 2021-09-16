@@ -1,8 +1,8 @@
-import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUser } from '../schema/IUser';
 
 interface IUsersRepository {
-  create(datas: ICreateUserDTO): Promise<IUser>;
+  create(datas: ICreateUsersDTO): Promise<IUser>;
   findByDocument(document: string): Promise<IUser | undefined>;
   findAll(): Promise<IUser[]>;
 }

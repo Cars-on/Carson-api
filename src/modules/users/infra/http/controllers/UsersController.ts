@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateUserService } from '@modules/users/services/CreateUserService';
+import { CreateUsersService } from '@modules/users/services/CreateUsersService';
 
 class UsersController {
   public async upload(request: Request, response: Response): Promise<Response> {
@@ -13,8 +13,8 @@ class UsersController {
       });
     }
 
-    const createUserService = container.resolve(CreateUserService);
-    const lot = await createUserService.execute(file);
+    const createUsersService = container.resolve(CreateUsersService);
+    const lot = await createUsersService.execute(file);
 
     return response.json({
       message: 'CSV com usuários inserido com sucesso',

@@ -7,14 +7,14 @@ import crypto from 'crypto';
 
 import { VerifyParams } from '@modules/users/infra/validation/usersValidation';
 
-import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
 
 const verifyParams = new VerifyParams();
 
 @injectable()
-class CreateUserService {
+class CreateUsersService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -23,10 +23,10 @@ class CreateUserService {
     private usersLogRepository: IUsersLogRepository,
   ) {}
 
-  saveUsers(file: Express.Multer.File): Promise<ICreateUserDTO[]> {
+  saveUsers(file: Express.Multer.File): Promise<ICreateUsersDTO[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path);
-      const users: ICreateUserDTO[] = [];
+      const users: ICreateUsersDTO[] = [];
 
       const parseFile = csvParse();
 
@@ -34,7 +34,16 @@ class CreateUserService {
 
       parseFile
         .on('data', async line => {
-          const [cnpj, cpf, name, user_name, email, phone, address] = line;
+          const [
+            cnpj,
+            cpf,
+            name,
+            user_name,
+            email,
+            phone,
+            address,
+            state,
+          ] = line;
 
           users.push({
             cnpj,
@@ -44,6 +53,7 @@ class CreateUserService {
             email,
             phone,
             address,
+            state,
           });
         })
         .on('end', () => {
@@ -62,7 +72,16 @@ class CreateUserService {
 
     users.map(async (item, index) => {
       if (index !== 0) {
-        const { cnpj, cpf, name, user_name, email, phone, address } = item;
+        const {
+          cnpj,
+          cpf,
+          name,
+          user_name,
+          email,
+          phone,
+          address,
+          state,
+        } = item;
         const errors = await verifyParams.execute(item);
 
         if (errors) {
@@ -83,6 +102,7 @@ class CreateUserService {
           email,
           phone,
           address,
+          state,
           lot,
         });
       }
@@ -92,4 +112,4 @@ class CreateUserService {
   }
 }
 
-export { CreateUserService };
+export { CreateUsersService };
