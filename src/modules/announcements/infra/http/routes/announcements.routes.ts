@@ -17,8 +17,6 @@ announcementRoutes.post(
   announcementsController.create,
 );
 
-announcementRoutes.get('/', (req, res) => {
-  return res.json({ projeto: 'Carson' });
-});
+announcementRoutes.get('/', announcementsController.index);
 
 export { announcementRoutes };
