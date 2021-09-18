@@ -11,7 +11,7 @@ class UsersRepository implements IUsersRepository {
     this.logsRepository = getMongoRepository<User>(User, 'default');
   }
 
-  public async findAll(): Promise<IUser[]> {
+  public async findAll(): Promise<IUser[] | undefined> {
     const users = await this.logsRepository
       .createCursor(this.logsRepository.find())
       .toArray();
