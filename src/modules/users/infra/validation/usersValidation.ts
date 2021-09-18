@@ -25,14 +25,11 @@ class VerifyParams {
       ['cnpj', 'cpf'],
     );
 
-    // console.log(schema);
-
     try {
       await schema.validate(datas, {
         abortEarly: false,
       });
     } catch (error) {
-      // console.log(error.errors);
       return await error.errors;
     }
   }

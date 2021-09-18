@@ -8,7 +8,7 @@ import {
   Entity,
 } from 'typeorm';
 
-import { IUserLogs } from '@modules/users/schema/IUserLogs';
+import { IUserLogs } from '@modules/users/schemas/IUserLogs';
 
 @Entity('user_logs')
 class UserLog implements IUserLogs {

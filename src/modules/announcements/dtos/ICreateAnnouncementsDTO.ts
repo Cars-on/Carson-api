@@ -1,7 +1,4 @@
-import { ObjectId } from 'mongodb';
-
-interface IAnnouncements {
-  id: ObjectId;
+export interface ICreateAnnouncementsDTO {
   manufacturer: string;
   brand: string;
   model: string;
@@ -11,6 +8,5 @@ interface IAnnouncements {
   cpf: string;
   cnpj: string;
   price: string;
+  lot: string;
 }
-
-export { IAnnouncements };
