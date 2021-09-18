@@ -1,4 +1,4 @@
-import { UserRoles } from '@modules/users/schema/IUser';
+import { UserRoles } from '@modules/users/schemas/IUser';
 
 export interface ICreateUsersDTO {
   cnpj: string;

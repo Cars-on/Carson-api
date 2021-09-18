@@ -1,4 +1,4 @@
-import { IAnnouncements } from '@modules/announcements/schema/IAnnouncement';
+import { IAnnouncement } from '@modules/announcements/schemas/IAnnouncement';
 import { ObjectId } from 'mongodb';
 import {
   Column,
@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity('announcements')
-class Announcements implements IAnnouncements {
+class Announcements implements IAnnouncement {
   @ObjectIdColumn()
   id: ObjectId;
 
@@ -38,6 +38,9 @@ class Announcements implements IAnnouncements {
 
   @Column()
   price: string;
+
+  @Column()
+  lot: string;
 
   @CreateDateColumn()
   created_at: Date;

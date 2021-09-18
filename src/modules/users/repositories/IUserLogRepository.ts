@@ -1,5 +1,5 @@
 import { ICreateUserLogDTO } from '@modules/users/dtos/ICreateUserLogDTO';
-import { IUserLogs } from '../schema/IUserLogs';
+import { IUserLogs } from '../schemas/IUserLogs';
 
 interface IUsersLogRepository {
   create(datas: ICreateUserLogDTO): Promise<IUserLogs | undefined>;

@@ -1,6 +1,6 @@
 import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
-import { IUser } from '@modules/users/schema/IUser';
+import { IUser } from '@modules/users/schemas/IUser';
 import { getConnection, getMongoRepository, MongoRepository } from 'typeorm';
 import { User } from '../schemas/User';
 

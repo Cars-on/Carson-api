@@ -7,6 +7,9 @@ import { UsersRepository } from '@modules/users/infra/typeorm/repositories/Users
 import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
 import { UsersLogRepository } from '@modules/users/infra/typeorm/repositories/UsersLogRepository';
 
+import { AnnouncementsRepository } from '@modules/announcements/infra/typeorm/repositories/AnnouncementsRepository';
+import { IAnnouncementsRepository } from '@modules/announcements/repositories/IAnnouncementsRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -15,4 +18,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUsersLogRepository>(
   'UsersLogRepository',
   UsersLogRepository,
+);
+
+container.registerSingleton<IAnnouncementsRepository>(
+  'AnnouncementsRepository',
+  AnnouncementsRepository,
 );
