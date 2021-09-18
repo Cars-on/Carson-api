@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import { CreateUsersService } from '@modules/users/services/CreateUsersService';
+import { GetUsersService } from '@modules/users/services/GetUsersService';
 
 class UsersController {
   public async upload(request: Request, response: Response): Promise<Response> {
@@ -20,6 +21,13 @@ class UsersController {
       message: 'CSV com usuários inserido com sucesso',
       lot,
     });
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const getUsersService = container.resolve(GetUsersService);
+    const users = await getUsersService.execute();
+
+    return response.json(users);
   }
 }
 

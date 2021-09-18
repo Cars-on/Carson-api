@@ -13,8 +13,6 @@ const upload = multer({
 
 userRoutes.post('/import', <any>upload.single('file'), usersController.upload);
 
-userRoutes.get('/', (req, res) => {
-  return res.json({ projeto: 'Carson' });
-});
+userRoutes.get('/', usersController.index);
 
 export { userRoutes };
