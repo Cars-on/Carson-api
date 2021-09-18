@@ -2,14 +2,14 @@ import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnno
 import { IAnnouncementsRepository } from '@modules/announcements/repositories/IAnnouncementsRepository';
 import { IAnnouncement } from '@modules/announcements/schemas/IAnnouncement';
 import { getMongoRepository, MongoRepository } from 'typeorm';
-import { Announcements } from '../schemas/Announcement';
+import { Announcement } from '../schemas/Announcement';
 
 class AnnouncementsRepository implements IAnnouncementsRepository {
-  private announcementsRepository: MongoRepository<Announcements>;
+  private announcementsRepository: MongoRepository<Announcement>;
 
   constructor() {
-    this.announcementsRepository = getMongoRepository<Announcements>(
-      Announcements,
+    this.announcementsRepository = getMongoRepository<Announcement>(
+      Announcement,
       'default',
     );
   }

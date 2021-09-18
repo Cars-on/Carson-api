@@ -5,15 +5,21 @@ import csvParse from 'csv-parse';
 import crypto from 'crypto';
 import { inject, injectable } from 'tsyringe';
 
+import { VerifyParams } from '@modules/announcements/infra/validation/announcementsValidation';
+
 import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnnouncementsDTO';
 import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
+import { IAnnouncementsLogsRepository } from '../repositories/IAnnouncementsLogsRepository';
 
-// const verifyParams = new VerifyParams();
+const verifyParams = new VerifyParams();
 @injectable()
 class CreateAnnouncementsService {
   constructor(
     @inject('AnnouncementsRepository')
     private announcementsRepository: IAnnouncementsRepository,
+
+    @inject('AnnouncementsLogsRepository')
+    private announcementsLogsRepository: IAnnouncementsLogsRepository,
   ) {}
 
   saveAnnouncements(
@@ -39,6 +45,7 @@ class CreateAnnouncementsService {
             cpf,
             cnpj,
             price,
+            description,
           ] = line;
 
           announcements.push({
@@ -51,6 +58,7 @@ class CreateAnnouncementsService {
             cpf,
             cnpj,
             price,
+            description,
           });
         })
         .on('end', () => {
@@ -62,7 +70,7 @@ class CreateAnnouncementsService {
     });
   }
 
-  async execute(file: Express.Multer.File): Promise<void> {
+  async execute(file: Express.Multer.File): Promise<string> {
     const announcements = await this.saveAnnouncements(file);
 
     const lot = crypto.randomBytes(3).toString('hex');
@@ -79,17 +87,21 @@ class CreateAnnouncementsService {
           cpf,
           cnpj,
           price,
+          description,
         } = item;
-        // const errors = await verifyParams.execute(item);
-        // if (errors) {
-        //   Object.assign(item, {
-        //     error: errors,
-        //     line: index + 1,
-        // lot
-        //   });
-        //   await this.announcementsRepository.create(item);
-        //   return;
-        // }
+
+        const errors = await verifyParams.execute(item);
+
+        if (errors) {
+          console.log(errors);
+          Object.assign(item, {
+            error: errors,
+            line: index + 1,
+            lot,
+          });
+          await this.announcementsLogsRepository.create(item);
+          return;
+        }
 
         await this.announcementsRepository.create({
           manufacturer,
@@ -101,6 +113,7 @@ class CreateAnnouncementsService {
           cpf,
           cnpj,
           price,
+          description,
           lot,
         });
       }

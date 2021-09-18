@@ -16,8 +16,11 @@ class AnnouncementsController {
       CreateAnnouncementsService,
     );
 
-    await createAnnouncementsService.execute(file);
-    return response.json({ teste: 'ok' });
+    const lot = await createAnnouncementsService.execute(file);
+    return response.json({
+      message: 'CSV com anúncios inserido com sucesso',
+      lot,
+    });
   }
 }
 
