@@ -1,4 +1,4 @@
-import { IAnnouncement } from '@modules/announcements/schemas/IAnnouncement';
+import { IAnnouncementLogs } from '@modules/announcements/schemas/IAnnouncementLogs';
 import { ObjectId } from 'mongodb';
 import {
   Column,
@@ -8,42 +8,48 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('announcements')
-class Announcement implements IAnnouncement {
+@Entity('announcements_logs')
+class AnnouncementLogs implements IAnnouncementLogs {
   @ObjectIdColumn()
   id: ObjectId;
 
   @Column('varchar')
   manufacturer: string;
 
-  @Column()
+  @Column('varchar')
   brand: string;
 
-  @Column()
+  @Column('varchar')
   model: string;
 
-  @Column()
+  @Column('varchar')
   advertiser_code: string;
 
-  @Column()
+  @Column('varchar')
   manufacturer_year: string;
 
-  @Column()
+  @Column('varchar')
   brand_year: string;
 
-  @Column()
+  @Column('varchar')
   cpf: string;
 
-  @Column()
+  @Column('varchar')
   cnpj: string;
 
-  @Column()
+  @Column('varchar')
   price: string;
 
-  @Column()
+  @Column('varchar')
+  error: string[];
+
+  @Column('number')
+  line: number;
+
+  @Column('varchar')
   description: string;
 
-  @Column()
+  @Column('varchar')
   lot: string;
 
   @CreateDateColumn()
@@ -53,4 +59,4 @@ class Announcement implements IAnnouncement {
   updated_at: Date;
 }
 
-export { Announcement };
+export { AnnouncementLogs };

@@ -8,5 +8,6 @@ export interface ICreateAnnouncementsDTO {
   cpf: string;
   cnpj: string;
   price: string;
-  lot: string;
+  description?: string;
+  lot?: string;
 }

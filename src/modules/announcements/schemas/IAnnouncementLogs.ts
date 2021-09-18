@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-interface IAnnouncement {
+interface IAnnouncementLogs {
   id: ObjectId;
   manufacturer: string;
   brand: string;
@@ -11,8 +11,10 @@ interface IAnnouncement {
   cpf: string;
   cnpj: string;
   price: string;
+  error: string[];
+  line: number;
   description: string;
   lot: string;
 }
 
-export { IAnnouncement };
+export { IAnnouncementLogs };
