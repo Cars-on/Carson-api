@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+
 import { CreateAnnouncementsService } from '@modules/announcements/services/CreateAnnouncementsService';
+import { GetAnnouncementsService } from '@modules/announcements/services/GetAnnouncementsService';
 
 class AnnouncementsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -21,6 +23,12 @@ class AnnouncementsController {
       message: 'CSV com anúncios inserido com sucesso',
       lot,
     });
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const getAnnouncementsService = container.resolve(GetAnnouncementsService);
+    const announcements = await getAnnouncementsService.execute();
+    return response.json(announcements);
   }
 }
 

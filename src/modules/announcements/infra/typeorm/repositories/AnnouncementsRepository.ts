@@ -20,6 +20,14 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
 
     return announcement;
   }
+
+  public async findAll(): Promise<IAnnouncement[] | undefined> {
+    const announcements = await this.announcementsRepository
+      .createCursor(this.announcementsRepository.find())
+      .toArray();
+
+    return announcements;
+  }
 }
 
 export { AnnouncementsRepository };

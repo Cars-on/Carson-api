@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories/IAnnouncementsLogsRepository';
 
 @injectable()
-class GetUserLogsService {
+class GetAnnouncementsLogsService {
   constructor(
     @inject('AnnouncementsLogsRepository')
     private announcementsLogsRepository: IAnnouncementsLogsRepository,
@@ -16,4 +16,4 @@ class GetUserLogsService {
   }
 }
 
-export { GetUserLogsService };
+export { GetAnnouncementsLogsService };
