@@ -93,7 +93,6 @@ class CreateAnnouncementsService {
         const errors = await verifyParams.execute(item);
 
         if (errors) {
-          console.log(errors);
           Object.assign(item, {
             error: errors,
             line: index + 1,

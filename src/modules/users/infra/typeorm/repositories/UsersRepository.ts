@@ -12,11 +12,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   public async findAll(): Promise<IUser[] | undefined> {
-    const users = await this.logsRepository
-      .createCursor(this.logsRepository.find())
-      .toArray();
-
-    return users;
+    return await this.logsRepository.find();
   }
 
   public async create(datas: ICreateUsersDTO): Promise<User> {

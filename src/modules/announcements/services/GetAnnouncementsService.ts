@@ -1,6 +1,15 @@
 import { inject, injectable } from 'tsyringe';
 
+import { IQueryParamsDTO } from '@modules/announcements/dtos/IQueryParamsDTO';
 import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
+import { IAnnouncement } from '../schemas/IAnnouncement';
+
+interface IResponse {
+  announcements: IAnnouncement[];
+  page: number;
+  total_pages: number;
+  total_results: number;
+}
 
 @injectable()
 class GetAnnouncementsService {
@@ -9,10 +18,21 @@ class GetAnnouncementsService {
     private announcementsRepository: IAnnouncementsRepository,
   ) {}
 
-  public async execute(): Promise<any> {
-    const announcements = await this.announcementsRepository.findAll();
+  public async execute({
+    page,
+    per_page,
+  }: IQueryParamsDTO): Promise<IResponse> {
+    const [announcements, result] = await this.announcementsRepository.findAll({
+      page,
+      per_page,
+    });
 
-    return announcements;
+    return {
+      announcements,
+      page,
+      total_pages: Math.ceil(result / per_page),
+      total_results: result,
+    };
   }
 }
 

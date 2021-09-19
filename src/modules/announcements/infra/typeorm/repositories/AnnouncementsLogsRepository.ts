@@ -18,9 +18,9 @@ class AnnouncementsLogsRepository implements IAnnouncementsLogsRepository {
     datas: ICreateAnnouncementsDTO,
   ): Promise<IAnnouncementLogs | undefined> {
     const createLog = this.announcementsLogsRepository.create(datas);
-    const log = await this.announcementsLogsRepository.save(createLog);
+    await this.announcementsLogsRepository.save(createLog);
 
-    return log;
+    return createLog;
   }
 
   public async findByLot(

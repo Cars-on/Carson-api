@@ -26,8 +26,12 @@ class AnnouncementsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    const { page, per_page } = request.query;
     const getAnnouncementsService = container.resolve(GetAnnouncementsService);
-    const announcements = await getAnnouncementsService.execute();
+    const announcements = await getAnnouncementsService.execute({
+      page: Number(page) || 1,
+      per_page: Number(per_page) || 10,
+    });
     return response.json(announcements);
   }
 }
