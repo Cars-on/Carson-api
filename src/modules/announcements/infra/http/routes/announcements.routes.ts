@@ -18,5 +18,6 @@ announcementRoutes.post(
 );
 
 announcementRoutes.get('/', announcementsController.index);
+announcementRoutes.get('/:id', announcementsController.show);
 
 export { announcementRoutes };

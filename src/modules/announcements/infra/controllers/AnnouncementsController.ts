@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateAnnouncementsService } from '@modules/announcements/services/CreateAnnouncementsService';
 import { GetAnnouncementsService } from '@modules/announcements/services/GetAnnouncementsService';
+import { GetAnnouncementByIdService } from '@modules/announcements/services/GetAnnouncementByIdService';
 
 class AnnouncementsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -33,6 +34,18 @@ class AnnouncementsController {
       per_page: Number(per_page) || 12,
     });
     return response.json(announcements);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const getAnnouncementByIdService = container.resolve(
+      GetAnnouncementByIdService,
+    );
+
+    const announcement = await getAnnouncementByIdService.execute(id);
+
+    return response.json(announcement);
   }
 }
 
