@@ -119,6 +119,7 @@ class CreateAnnouncementsService {
         }
 
         await this.announcementsRepository.create({
+          user_id: user.id,
           manufacturer,
           brand,
           model,
