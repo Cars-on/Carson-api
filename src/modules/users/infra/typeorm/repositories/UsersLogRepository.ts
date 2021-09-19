@@ -12,17 +12,13 @@ class UsersLogRepository implements IUsersLogRepository {
 
   public async create(datas: ICreateUserLogDTO): Promise<UserLog | undefined> {
     const createLog = this.logsRepository.create(datas);
-    const log = await this.logsRepository.save(createLog);
+    await this.logsRepository.save(createLog);
 
-    return log;
+    return createLog;
   }
 
   public async findByLot(lot: string): Promise<UserLog[] | undefined> {
-    const logs = await this.logsRepository
-      .createCursor(this.logsRepository.find({ where: { lot } }))
-      .toArray();
-
-    return logs;
+    return await this.logsRepository.find({ where: { lot } });
   }
 }
 
