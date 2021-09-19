@@ -30,7 +30,7 @@ class AnnouncementsController {
     const getAnnouncementsService = container.resolve(GetAnnouncementsService);
     const announcements = await getAnnouncementsService.execute({
       page: Number(page) || 1,
-      per_page: Number(per_page) || 10,
+      per_page: Number(per_page) || 12,
     });
     return response.json(announcements);
   }

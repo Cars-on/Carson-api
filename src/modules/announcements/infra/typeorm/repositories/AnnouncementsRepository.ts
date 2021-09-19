@@ -17,29 +17,17 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
 
   public async create(datas: ICreateAnnouncementsDTO): Promise<IAnnouncement> {
     const announcement = this.announcementsRepository.create(datas);
-    await this.announcementsRepository.save(announcement);
-
-    return announcement;
+    return await this.announcementsRepository.save(announcement);
   }
 
   public async findAll({
     page,
     per_page,
   }: IQueryParamsDTO): Promise<[IAnnouncement[], number]> {
-    const announcements = await this.announcementsRepository.findAndCount({
+    return await this.announcementsRepository.findAndCount({
       skip: (page - 1) * per_page,
       take: per_page,
     });
-    // const announcements = await this.announcementsRepository
-    //   .createCursor(
-    //     this.announcementsRepository.findAndCount({
-    //       skip: (page - 1) * per_page,
-    //       take: per_page,
-    //     }),
-    //   )
-    //   .toArray();
-
-    return announcements;
   }
 }
 

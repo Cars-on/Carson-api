@@ -8,6 +8,7 @@ import { inject, injectable } from 'tsyringe';
 import { VerifyParams } from '@modules/announcements/infra/validation/announcementsValidation';
 
 import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnnouncementsDTO';
+import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
 import { IAnnouncementsLogsRepository } from '../repositories/IAnnouncementsLogsRepository';
 
@@ -20,6 +21,9 @@ class CreateAnnouncementsService {
 
     @inject('AnnouncementsLogsRepository')
     private announcementsLogsRepository: IAnnouncementsLogsRepository,
+
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
   ) {}
 
   saveAnnouncements(
@@ -95,6 +99,18 @@ class CreateAnnouncementsService {
         if (errors) {
           Object.assign(item, {
             error: errors,
+            line: index + 1,
+            lot,
+          });
+          await this.announcementsLogsRepository.create(item);
+          return;
+        }
+
+        const user = await this.usersRepository.findByDocument(cnpj || cpf);
+
+        if (!user) {
+          Object.assign(item, {
+            error: 'Usuário não cadastrado, verificar cpf ou cnpj',
             line: index + 1,
             lot,
           });
