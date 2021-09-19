@@ -36,6 +36,12 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
       where: { _id: new ObjectID(id) },
     });
   }
+
+  public async findByUserId(id: string): Promise<IAnnouncement | undefined> {
+    return await this.announcementsRepository.findOne({
+      where: { user_id: new ObjectID(id) },
+    });
+  }
 }
 
 export { AnnouncementsRepository };
