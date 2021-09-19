@@ -2,6 +2,7 @@ import { ObjectId } from 'mongodb';
 
 interface IAnnouncement {
   id: ObjectId;
+  user_id: string;
   manufacturer: string;
   brand: string;
   model: string;

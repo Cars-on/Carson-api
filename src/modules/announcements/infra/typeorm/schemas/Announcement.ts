@@ -14,6 +14,9 @@ class Announcement implements IAnnouncement {
   id: ObjectId;
 
   @Column('varchar')
+  user_id: string;
+
+  @Column('varchar')
   manufacturer: string;
 
   @Column()

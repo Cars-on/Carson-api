@@ -1,34 +1,34 @@
 import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { IUser } from '@modules/users/schemas/IUser';
-import { getConnection, getMongoRepository, MongoRepository } from 'typeorm';
+import { getMongoRepository, MongoRepository } from 'typeorm';
 import { User } from '../schemas/User';
 
 class UsersRepository implements IUsersRepository {
-  private logsRepository: MongoRepository<User>;
+  private usersRepository: MongoRepository<User>;
 
   constructor() {
-    this.logsRepository = getMongoRepository<User>(User, 'default');
+    this.usersRepository = getMongoRepository<User>(User, 'default');
   }
 
   public async findAll(): Promise<IUser[] | undefined> {
-    return await this.logsRepository.find();
+    return await this.usersRepository.find();
   }
 
   public async create(datas: ICreateUsersDTO): Promise<User> {
-    const newUsers = this.logsRepository.create(datas);
+    const newUsers = this.usersRepository.create(datas);
 
-    await this.logsRepository.save(newUsers);
+    await this.usersRepository.save(newUsers);
 
     return newUsers;
   }
 
   public async findByDocument(document: string): Promise<User | undefined> {
-    const usersRepo = getConnection().getMongoRepository(User);
+    if (document.length > 11) {
+      return await this.usersRepository.findOne({ where: { cnpj: document } });
+    }
 
-    const findUser = usersRepo.findOne(document);
-
-    return findUser;
+    return await this.usersRepository.findOne({ where: { cpf: document } });
   }
 }
 

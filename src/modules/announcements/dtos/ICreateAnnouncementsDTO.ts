@@ -1,4 +1,5 @@
 export interface ICreateAnnouncementsDTO {
+  user_id?: string;
   manufacturer: string;
   brand: string;
   model: string;
