@@ -13,6 +13,9 @@ import { IAnnouncementsRepository } from '@modules/announcements/repositories/IA
 import { AnnouncementsLogsRepository } from '@modules/announcements/infra/typeorm/repositories/AnnouncementsLogsRepository';
 import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories/IAnnouncementsLogsRepository';
 
+import { IUserTokenRepository } from '@modules/users/repositories/IUserTokenRepository';
+import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UsersTokenRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -31,4 +34,9 @@ container.registerSingleton<IAnnouncementsRepository>(
 container.registerSingleton<IAnnouncementsLogsRepository>(
   'AnnouncementsLogsRepository',
   AnnouncementsLogsRepository,
+);
+
+container.registerSingleton<IUserTokenRepository>(
+  'TokenRepository',
+  UserTokensRepository,
 );

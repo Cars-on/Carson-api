@@ -11,6 +11,8 @@ import { deleteFile } from '@utils/deleteFile';
 import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
+// import { IMailProvider } from '@shared/infra/container/providers/models/IMailProvider';
+import { IUserTokenRepository } from '../repositories/IUserTokenRepository';
 
 const verifyParams = new VerifyParams();
 
@@ -22,6 +24,12 @@ class CreateUsersService {
 
     @inject('UsersLogRepository')
     private usersLogRepository: IUsersLogRepository,
+
+    // @inject('MailProvider')
+    // private mailProvider: IMailProvider,
+
+    @inject('TokenRepository')
+    private tokenRepository: IUserTokenRepository,
   ) {}
 
   saveUsers(file: Express.Multer.File): Promise<ICreateUsersDTO[]> {
@@ -95,7 +103,7 @@ class CreateUsersService {
           return;
         }
 
-        await this.usersRepository.create({
+        const user = await this.usersRepository.create({
           cnpj,
           cpf,
           name,
@@ -106,10 +114,18 @@ class CreateUsersService {
           state,
           lot,
         });
+
+        const token = await this.tokenRepository.create(user.id);
+        // console.log(token);
       }
     });
 
     await deleteFile(file.path);
+
+    // await this.mailProvider.sendMail(
+    //   'teste@teste.com',
+    //   'Testando envio de email',
+    // );
 
     return lot;
   }
