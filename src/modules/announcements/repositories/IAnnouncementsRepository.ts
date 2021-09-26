@@ -7,6 +7,7 @@ interface IAnnouncementsRepository {
   findAll(datas: IQueryParamsDTO): Promise<[IAnnouncement[], number]>;
   findById(id: string): Promise<IAnnouncement | undefined>;
   findByUserId(id: string): Promise<IAnnouncement | undefined>;
+  sevePhoto(id: string, photo: string): Promise<void>;
 }
 
 export { IAnnouncementsRepository };

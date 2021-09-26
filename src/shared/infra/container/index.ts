@@ -1,6 +1,8 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
+import './providers';
+
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
@@ -12,6 +14,12 @@ import { IAnnouncementsRepository } from '@modules/announcements/repositories/IA
 
 import { AnnouncementsLogsRepository } from '@modules/announcements/infra/typeorm/repositories/AnnouncementsLogsRepository';
 import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories/IAnnouncementsLogsRepository';
+
+import { IUserTokenRepository } from '@modules/users/repositories/IUserTokenRepository';
+import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UsersTokenRepository';
+
+import { IHashProvider } from '@modules/users/providers/HashProvider/models/IHashProvider';
+import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -32,3 +40,10 @@ container.registerSingleton<IAnnouncementsLogsRepository>(
   'AnnouncementsLogsRepository',
   AnnouncementsLogsRepository,
 );
+
+container.registerSingleton<IUserTokenRepository>(
+  'TokenRepository',
+  UserTokensRepository,
+);
+
+container.registerSingleton<IHashProvider>('HashProvider', BCryptHashProvider);

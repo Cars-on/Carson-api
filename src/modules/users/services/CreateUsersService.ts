@@ -4,12 +4,16 @@ import fs from 'fs';
 import csvParse from 'csv-parse';
 import { inject, injectable } from 'tsyringe';
 import crypto from 'crypto';
+import path from 'path';
 
 import { VerifyParams } from '@modules/users/infra/validation/usersValidation';
+import { deleteFile } from '@utils/deleteFile';
 
 import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
+import { IMailProvider } from '@shared/infra/container/providers/mailProvider/models/IMailProvider';
+import { IUserTokenRepository } from '../repositories/IUserTokenRepository';
 
 const verifyParams = new VerifyParams();
 
@@ -21,6 +25,12 @@ class CreateUsersService {
 
     @inject('UsersLogRepository')
     private usersLogRepository: IUsersLogRepository,
+
+    @inject('MailProvider')
+    private mailProvider: IMailProvider,
+
+    @inject('TokenRepository')
+    private tokenRepository: IUserTokenRepository,
   ) {}
 
   saveUsers(file: Express.Multer.File): Promise<ICreateUsersDTO[]> {
@@ -94,7 +104,7 @@ class CreateUsersService {
           return;
         }
 
-        await this.usersRepository.create({
+        const user = await this.usersRepository.create({
           cnpj,
           cpf,
           name,
@@ -105,8 +115,36 @@ class CreateUsersService {
           state,
           lot,
         });
+
+        const userToken = await this.tokenRepository.create(user.id);
+
+        const confirmUserTemplate = path.resolve(
+          __dirname,
+          '..',
+          'views',
+          'confirm_user.hbs',
+        );
+
+        await this.mailProvider.sendMail({
+          to: {
+            name: user.name,
+            email: user.email,
+          },
+          subject: '[Carson] Confirmação de Cadastro',
+          templateData: {
+            file: confirmUserTemplate,
+            variables: {
+              name: user.name,
+              link: `${process.env.APP_WEB_URL}/confirm-user?token=${userToken.token}`,
+              companyName: 'CarsOn',
+              password: user.password,
+            },
+          },
+        });
       }
     });
+
+    await deleteFile(file.path);
 
     return lot;
   }

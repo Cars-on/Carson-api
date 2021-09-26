@@ -49,6 +49,9 @@ class Announcement implements IAnnouncement {
   @Column()
   lot: string;
 
+  @Column('varchar')
+  photos: string[];
+
   @CreateDateColumn()
   created_at: Date;
 

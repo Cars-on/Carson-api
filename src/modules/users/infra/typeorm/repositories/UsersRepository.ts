@@ -30,6 +30,10 @@ class UsersRepository implements IUsersRepository {
 
     return await this.usersRepository.findOne({ where: { cpf: document } });
   }
+
+  public async findByEmail(email: string): Promise<IUser | undefined> {
+    return await this.usersRepository.findOne({ where: { email } });
+  }
 }
 
 export { UsersRepository };
