@@ -1,4 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-return-await */
+
 import * as Yup from 'yup';
 
 class VerifyParams {

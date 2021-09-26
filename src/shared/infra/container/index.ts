@@ -1,6 +1,8 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
+import './providers';
+
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository';
 

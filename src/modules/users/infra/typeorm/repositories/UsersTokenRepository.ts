@@ -18,7 +18,6 @@ class UserTokensRepository implements IUserTokenRepository {
     const userToken = this.usersTokenRepository.create({ user_id: userId });
 
     await this.usersTokenRepository.save(userToken);
-    console.log({ userToken });
 
     return userToken;
   }
