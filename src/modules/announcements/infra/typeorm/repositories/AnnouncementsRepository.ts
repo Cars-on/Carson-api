@@ -42,6 +42,17 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
       where: { user_id: new ObjectID(id) },
     });
   }
+
+  public async sevePhoto(id: string, photo: string): Promise<void> {
+    await this.announcementsRepository.updateOne(
+      {
+        _id: new ObjectID(id),
+      },
+      {
+        $set: { photo },
+      },
+    );
+  }
 }
 
 export { AnnouncementsRepository };

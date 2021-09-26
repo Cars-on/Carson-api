@@ -6,6 +6,7 @@ import { inject, injectable } from 'tsyringe';
 import crypto from 'crypto';
 
 import { VerifyParams } from '@modules/users/infra/validation/usersValidation';
+import { deleteFile } from '@utils/deleteFile';
 
 import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
@@ -107,6 +108,8 @@ class CreateUsersService {
         });
       }
     });
+
+    await deleteFile(file.path);
 
     return lot;
   }

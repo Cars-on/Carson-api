@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { CreateAnnouncementsService } from '@modules/announcements/services/CreateAnnouncementsService';
 import { GetAnnouncementsService } from '@modules/announcements/services/GetAnnouncementsService';
 import { GetAnnouncementByIdService } from '@modules/announcements/services/GetAnnouncementByIdService';
+import { UploadPhotosService } from '@modules/announcements/services/UploadPhotosService';
 
 class AnnouncementsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -44,6 +45,20 @@ class AnnouncementsController {
     );
 
     const announcement = await getAnnouncementByIdService.execute(id);
+
+    return response.json(announcement);
+  }
+
+  public async upload(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const photos = request.files;
+
+    const uploadPhotosService = container.resolve(UploadPhotosService);
+
+    const announcement = await uploadPhotosService.execute(
+      id,
+      <Express.Multer.File[]>photos,
+    );
 
     return response.json(announcement);
   }
