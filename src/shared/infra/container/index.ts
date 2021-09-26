@@ -18,6 +18,9 @@ import { IAnnouncementsLogsRepository } from '@modules/announcements/repositorie
 import { IUserTokenRepository } from '@modules/users/repositories/IUserTokenRepository';
 import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UsersTokenRepository';
 
+import { IHashProvider } from '@modules/users/providers/HashProvider/models/IHashProvider';
+import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -42,3 +45,5 @@ container.registerSingleton<IUserTokenRepository>(
   'TokenRepository',
   UserTokensRepository,
 );
+
+container.registerSingleton<IHashProvider>('HashProvider', BCryptHashProvider);
