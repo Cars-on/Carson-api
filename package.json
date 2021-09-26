@@ -19,6 +19,7 @@
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.29",
+    "uuidv4": "^6.2.12",
     "yup": "^0.32.9"
   },
   "devDependencies": {
