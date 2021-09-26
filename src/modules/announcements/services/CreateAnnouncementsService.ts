@@ -9,6 +9,7 @@ import { VerifyParams } from '@modules/announcements/infra/validation/announceme
 
 import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnnouncementsDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
+import { deleteFile } from '@utils/deleteFile';
 import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
 import { IAnnouncementsLogsRepository } from '../repositories/IAnnouncementsLogsRepository';
 
@@ -134,6 +135,8 @@ class CreateAnnouncementsService {
         });
       }
     });
+
+    await deleteFile(file.path);
 
     return lot;
   }

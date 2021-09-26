@@ -14,6 +14,7 @@ interface IAnnouncement {
   price: string;
   description: string;
   lot: string;
+  pthots?: string[];
 }
 
 export { IAnnouncement };
