@@ -14,7 +14,7 @@ interface IAnnouncement {
   price: string;
   description: string;
   lot: string;
-  pthots?: string[];
+  photos?: string[];
 }
 
 export { IAnnouncement };

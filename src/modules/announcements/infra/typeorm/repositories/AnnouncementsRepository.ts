@@ -43,13 +43,13 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
     });
   }
 
-  public async sevePhoto(id: string, photo: string): Promise<void> {
+  public async sevePhoto(id: string, photos: string[]): Promise<void> {
     await this.announcementsRepository.updateOne(
       {
         _id: new ObjectID(id),
       },
       {
-        $set: { photo },
+        $set: { photos },
       },
     );
   }
