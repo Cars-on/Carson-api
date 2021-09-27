@@ -6,6 +6,8 @@ interface IUsersRepository {
   findByDocument(document: string): Promise<IUser | undefined>;
   findAll(): Promise<IUser[] | undefined>;
   findByEmail(email: string): Promise<IUser | undefined>;
+  findById(userId: string): Promise<IUser | undefined>;
+  save(user: Omit<IUser, 'id'>): Promise<IUser | undefined>;
 }
 
 export { IUsersRepository };
