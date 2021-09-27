@@ -28,17 +28,30 @@ npm install
 3. Crie um arquivo .env para para a conexão do Mongo na raiz do projeto:
 ```
 MONGO_DB_URL=mongodb://root:carson_app@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
+
+APP_SECRET=carsOn2349201
+
+APP_WEB_URL=http://localhost:3000
+
 ```
 
 4. Crie também na raiz do projeto um arquivo **ormconfig.js** com as seguintes propriedades:
 ```
-name,
-    type,
+require("dotenv/config")
+
+
+module.exports = [
+  {
+    name: 'default',
+    type: 'mongodb',
     url: process.env.MONGO_DB_URL,
-    useUnifiedTopology,
-    authSourse,
-    database,
-    entities: ["./src/modules//infra/typeorm/schemas/{.js,.ts}"],
+    useUnifiedTopology: true,
+    authSourse: 'admin',
+    database: 'carson',
+    entities: ["./src/modules/**/infra/typeorm/schemas/**{.js,.ts}"],
+  }
+]
+
 ```
 
 5. Para iniciar o servidor, agora execute: 
