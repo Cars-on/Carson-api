@@ -10,6 +10,7 @@ export interface ICreateUsersDTO {
   address: string;
   state: string;
 
+  error?: Array<string>;
   password?: string;
   first_access?: boolean;
   role?: UserRoles;
