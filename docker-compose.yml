@@ -2,8 +2,10 @@ version: "3.7"
 
 services:
   app:
-    build: .
-    restart: always
+    image: node:14.17.1-alpine3.13
+    container_name: carson_app
+    restart: on-failure
+    command: yarn dev
     working_dir: /app
     volumes:
       - ./:/app
@@ -17,12 +19,12 @@ services:
     image: mongo
     command: [--auth]
     container_name: carson_mongo
-    restart: always
+    restart: on-failure
     volumes:
       - ./.docker/mongo/data/:/data/db
     ports:
       - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=carson_app
+      - MONGO_INITDB_ROOT_PASSWORD=carson
     network_mode: host

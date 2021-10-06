@@ -1,9 +1,10 @@
-import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
-import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
-import { IUser } from '@modules/users/schemas/IUser';
-import { ObjectID } from 'mongodb';
 import { getMongoRepository, MongoRepository } from 'typeorm';
-import { User } from '../schemas/User';
+import { ObjectID } from 'mongodb';
+
+import { ICreateUsersDTO } from '@modules/users/dtos';
+import { IUsersRepository } from '@modules/users/repositories';
+import { IUser } from '@modules/users/schemas';
+import { User } from '../schemas';
 
 class UsersRepository implements IUsersRepository {
   private usersRepository: MongoRepository<User>;

@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateUsersService } from '@modules/users/services/CreateUsersService';
-import { GetUsersService } from '@modules/users/services/GetUsersService';
+import { CreateUsersService, GetUsersService } from '@modules/users/services';
 
 class UsersController {
   public async upload(request: Request, response: Response): Promise<Response> {

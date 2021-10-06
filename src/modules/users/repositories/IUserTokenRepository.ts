@@ -1,4 +1,4 @@
-import { IUserToken } from '../schemas/IUserToken';
+import { IUserToken } from '../schemas';
 
 interface IUserTokenRepository {
   create(userId: string): Promise<IUserToken>;

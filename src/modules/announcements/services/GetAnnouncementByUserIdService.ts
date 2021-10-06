@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
-import { IAnnouncement } from '../schemas/IAnnouncement';
+import { IAnnouncementsRepository } from '../repositories';
+import { IAnnouncement } from '../schemas';
 
 @injectable()
 class GetAnnouncementByUserIdService {

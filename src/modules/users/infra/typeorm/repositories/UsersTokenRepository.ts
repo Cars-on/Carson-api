@@ -1,8 +1,8 @@
-import { IUserTokenRepository } from '@modules/users/repositories/IUserTokenRepository';
-import { IUserToken } from '@modules/users/schemas/IUserToken';
 import { getMongoRepository, MongoRepository } from 'typeorm';
-// import { User } from '../schemas/User';
-import { UserToken } from '../schemas/UserToeken';
+
+import { IUserTokenRepository } from '@modules/users/repositories';
+import { IUserToken } from '@modules/users/schemas';
+import { UserToken } from '../schemas';
 
 class UserTokensRepository implements IUserTokenRepository {
   private usersTokenRepository: MongoRepository<UserToken>;

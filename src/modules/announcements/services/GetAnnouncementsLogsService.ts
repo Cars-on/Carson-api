@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories/IAnnouncementsLogsRepository';
+import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories';
 
 @injectable()
 class GetAnnouncementsLogsService {

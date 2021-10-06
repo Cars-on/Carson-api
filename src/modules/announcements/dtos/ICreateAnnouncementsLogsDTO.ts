@@ -1,4 +1,4 @@
-export interface ICreateAnnouncementsDTO {
+export interface ICreateAnnouncementsLogsDTO {
   manufacturer?: string;
   brand?: string;
   model?: string;

@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IQueryParamsDTO } from '@modules/announcements/dtos/IQueryParamsDTO';
-import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
-import { IAnnouncement } from '../schemas/IAnnouncement';
+import { IQueryParamsDTO } from '@modules/announcements/dtos';
+import { IAnnouncementsRepository } from '../repositories';
+import { IAnnouncement } from '../schemas';
 
 interface IResponse {
   announcements: IAnnouncement[];

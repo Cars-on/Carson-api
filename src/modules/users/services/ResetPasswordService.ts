@@ -1,8 +1,8 @@
-import { AppError } from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
+import { AppError } from '@shared/errors/AppError';
+
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
-import { IUsersRepository } from '../repositories/IUserRepository';
-import { IUserTokenRepository } from '../repositories/IUserTokenRepository';
+import { IUsersRepository, IUserTokenRepository } from '../repositories';
 
 @injectable()
 class ResetPasswordService {

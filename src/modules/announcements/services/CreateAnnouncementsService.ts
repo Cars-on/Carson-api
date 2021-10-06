@@ -6,12 +6,14 @@ import crypto from 'crypto';
 import { inject, injectable } from 'tsyringe';
 
 import { VerifyParams } from '@modules/announcements/infra/validation/announcementsValidation';
-
-import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnnouncementsDTO';
-import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
 import { deleteFile } from '@utils/deleteFile';
-import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
-import { IAnnouncementsLogsRepository } from '../repositories/IAnnouncementsLogsRepository';
+
+import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos';
+import { IUsersRepository } from '@modules/users/repositories';
+import {
+  IAnnouncementsRepository,
+  IAnnouncementsLogsRepository,
+} from '../repositories';
 
 const verifyParams = new VerifyParams();
 @injectable()

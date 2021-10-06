@@ -1,6 +1,8 @@
-import { IQueryParamsDTO } from '@modules/announcements/dtos/IQueryParamsDTO';
-import { ICreateAnnouncementsDTO } from '../dtos/ICreateAnnouncementsDTO';
-import { IAnnouncement } from '../schemas/IAnnouncement';
+import {
+  IQueryParamsDTO,
+  ICreateAnnouncementsDTO,
+} from '@modules/announcements/dtos';
+import { IAnnouncement } from '../schemas';
 
 interface IAnnouncementsRepository {
   create(datas: ICreateAnnouncementsDTO): Promise<IAnnouncement>;

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { UsersLogsController } from '@modules/users/infra/http/controllers/UsersLogsController';
+import { UsersLogsController } from '@modules/users/infra/http/controllers';
 
 const usersLogsRoutes = Router();
 

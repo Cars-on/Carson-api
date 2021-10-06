@@ -9,11 +9,14 @@ import path from 'path';
 import { VerifyParams } from '@modules/users/infra/validation/usersValidation';
 import { deleteFile } from '@utils/deleteFile';
 
-import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
-import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
-import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
+import { ICreateUsersDTO } from '@modules/users/dtos';
+import {
+  IUsersRepository,
+  IUsersLogRepository,
+  IUserTokenRepository,
+} from '@modules/users/repositories';
+
 import { IMailProvider } from '@shared/infra/container/providers/mailProvider/models/IMailProvider';
-import { IUserTokenRepository } from '../repositories/IUserTokenRepository';
 
 const verifyParams = new VerifyParams();
 
