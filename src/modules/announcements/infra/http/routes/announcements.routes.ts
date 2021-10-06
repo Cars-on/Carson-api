@@ -2,7 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 
-import { AnnouncementsController } from '@modules/announcements/infra/controllers/AnnouncementsController';
+import { AnnouncementsController } from '@modules/announcements/infra/controllers';
 
 const announcementRoutes = Router();
 

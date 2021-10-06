@@ -1,5 +1,5 @@
-import { ICreateAnnouncementsDTO } from '../dtos/ICreateAnnouncementsDTO';
-import { IAnnouncementLogs } from '../schemas/IAnnouncementLogs';
+import { ICreateAnnouncementsDTO } from '../dtos';
+import { IAnnouncementLogs } from '../schemas';
 
 interface IAnnouncementsLogsRepository {
   create(

@@ -1,11 +1,16 @@
 import { Router } from 'express';
-import { userRoutes } from '@modules/users/infra/http/routes/users.routes';
-import { usersLogsRoutes } from '@modules/users/infra/http/routes/users.logs.routes';
-import { sessionsRouter } from '@modules/users/infra/http/routes/sessions.routes';
-import { passwordRouter } from '@modules/users/infra/http/routes/password.routes';
-import { announcementRoutes } from '@modules/announcements/infra/http/routes/announcements.routes';
-import { AnnouncementsLogsRoutes } from '@modules/announcements/infra/http/routes/announcements.logs.routes';
-import { usersAnnouncementRoutes } from '@modules/announcements/infra/http/routes/announcements.users.routes';
+import {
+  userRoutes,
+  passwordRouter,
+  sessionsRouter,
+  usersLogsRoutes,
+} from '@modules/users/infra/http/routes';
+
+import {
+  announcementRoutes,
+  AnnouncementsLogsRoutes,
+  usersAnnouncementRoutes,
+} from '@modules/announcements/infra/http/routes';
 
 const routes = Router();
 

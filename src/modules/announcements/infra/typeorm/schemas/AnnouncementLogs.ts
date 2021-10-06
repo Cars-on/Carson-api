@@ -1,4 +1,4 @@
-import { IAnnouncementLogs } from '@modules/announcements/schemas/IAnnouncementLogs';
+import { IAnnouncementLogs } from '@modules/announcements/schemas';
 import { ObjectId } from 'mongodb';
 import {
   Column,

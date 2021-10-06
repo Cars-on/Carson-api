@@ -1,7 +1,7 @@
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
-import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
+import { IAnnouncementsRepository } from '../repositories';
 
 @injectable()
 class UploadPhotosService {

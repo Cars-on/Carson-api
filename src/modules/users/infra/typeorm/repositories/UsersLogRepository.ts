@@ -1,7 +1,8 @@
-import { ICreateUserLogDTO } from '@modules/users/dtos/ICreateUserLogDTO';
-import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
 import { getMongoRepository, MongoRepository } from 'typeorm';
-import { UserLog } from '../schemas/UserLogs';
+
+import { ICreateUserLogDTO } from '@modules/users/dtos';
+import { IUsersLogRepository } from '@modules/users/repositories';
+import { UserLog } from '../schemas';
 
 class UsersLogRepository implements IUsersLogRepository {
   private logsRepository: MongoRepository<UserLog>;

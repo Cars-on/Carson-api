@@ -1,7 +1,9 @@
-import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnnouncementsDTO';
-import { IQueryParamsDTO } from '@modules/announcements/dtos/IQueryParamsDTO';
-import { IAnnouncementsRepository } from '@modules/announcements/repositories/IAnnouncementsRepository';
-import { IAnnouncement } from '@modules/announcements/schemas/IAnnouncement';
+import {
+  ICreateAnnouncementsDTO,
+  IQueryParamsDTO,
+} from '@modules/announcements/dtos';
+import { IAnnouncementsRepository } from '@modules/announcements/repositories';
+import { IAnnouncement } from '@modules/announcements/schemas';
 import { ObjectID } from 'mongodb';
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import { Announcement } from '../schemas/Announcement';

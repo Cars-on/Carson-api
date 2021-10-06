@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { GetAnnouncementByUserIdService } from '@modules/announcements/services/GetAnnouncementByUserIdService';
+import { GetAnnouncementByUserIdService } from '@modules/announcements/services';
 
 class UsersAnnouncementsController {
   public async show(request: Request, response: Response): Promise<Response> {

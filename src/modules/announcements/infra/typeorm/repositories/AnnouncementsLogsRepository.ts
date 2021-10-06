@@ -1,8 +1,8 @@
-import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos/ICreateAnnouncementsDTO';
-import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories/IAnnouncementsLogsRepository';
-import { IAnnouncementLogs } from '@modules/announcements/schemas/IAnnouncementLogs';
+import { ICreateAnnouncementsDTO } from '@modules/announcements/dtos';
+import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories';
+import { IAnnouncementLogs } from '@modules/announcements/schemas';
 import { getMongoRepository, MongoRepository } from 'typeorm';
-import { AnnouncementLogs } from '../schemas/AnnouncementLogs';
+import { AnnouncementLogs } from '../schemas';
 
 class AnnouncementsLogsRepository implements IAnnouncementsLogsRepository {
   private announcementsLogsRepository: MongoRepository<AnnouncementLogs>;

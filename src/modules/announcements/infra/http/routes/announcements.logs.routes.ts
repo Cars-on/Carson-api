@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { AnnouncementsLogsController } from '@modules/announcements/infra/controllers/AnnouncementsLogsController';
+import { AnnouncementsLogsController } from '@modules/announcements/infra/controllers';
 
 const AnnouncementsLogsRoutes = Router();
 

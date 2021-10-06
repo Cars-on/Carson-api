@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateAnnouncementsService } from '@modules/announcements/services/CreateAnnouncementsService';
-import { GetAnnouncementsService } from '@modules/announcements/services/GetAnnouncementsService';
-import { GetAnnouncementByIdService } from '@modules/announcements/services/GetAnnouncementByIdService';
-import { UploadPhotosService } from '@modules/announcements/services/UploadPhotosService';
+import {
+  CreateAnnouncementsService,
+  GetAnnouncementsService,
+  GetAnnouncementByIdService,
+  UploadPhotosService,
+} from '@modules/announcements/services';
 
 class AnnouncementsController {
   public async create(request: Request, response: Response): Promise<Response> {

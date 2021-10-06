@@ -11,7 +11,7 @@ import {
   BeforeInsert,
 } from 'typeorm';
 
-import { IUserToken } from '@modules/users/schemas/IUserToken';
+import { IUserToken } from '@modules/users/schemas';
 
 @Entity('users_token')
 class UserToken implements IUserToken {

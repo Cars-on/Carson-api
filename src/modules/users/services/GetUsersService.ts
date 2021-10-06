@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IUsersRepository } from '../repositories/IUserRepository';
+import { IUsersRepository } from '../repositories';
 
 @injectable()
 class GetUsersService {
