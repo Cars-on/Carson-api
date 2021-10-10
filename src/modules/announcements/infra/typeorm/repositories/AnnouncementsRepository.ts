@@ -24,8 +24,8 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
   }
 
   public async findAll({
-    page,
-    per_page,
+    page = 1,
+    per_page = 12,
   }: IQueryParamsDTO): Promise<[IAnnouncement[], number]> {
     return await this.announcementsRepository.findAndCount({
       skip: (page - 1) * per_page,
@@ -54,6 +54,63 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
         $set: { photos },
       },
     );
+  }
+
+  public async filter({
+    page = 1,
+    per_page = 12,
+    city,
+    lowest_price,
+    biggest_price,
+    model,
+    lowest_year,
+    biggest_year,
+    brand,
+    manufacturer,
+  }: IQueryParamsDTO): Promise<[IAnnouncement[], number]> {
+    const query = {};
+    if (manufacturer) {
+      Object.assign(query, { manufacturer });
+    }
+    if (brand) {
+      Object.assign(query, { brand });
+    }
+    if (city) {
+      Object.assign(query, { city });
+    }
+    if (lowest_price) {
+      Object.assign(query, { price: { $gte: lowest_price } });
+    }
+    if (biggest_price) {
+      Object.assign(query, { price: { $lte: biggest_price } });
+    }
+    if (lowest_price && biggest_price) {
+      Object.assign(query, {
+        price: { $gte: lowest_price, $lte: biggest_price },
+      });
+    }
+    if (model) {
+      Object.assign(query, { model });
+    }
+    if (lowest_year) {
+      Object.assign(query, { brand_year: { $gte: lowest_year } });
+    }
+    if (biggest_year) {
+      Object.assign(query, { brand_year: { $lte: biggest_year } });
+    }
+    if (lowest_year && biggest_year) {
+      Object.assign(query, {
+        brand_year: { $gte: lowest_year, $lte: biggest_year },
+      });
+    }
+
+    const announcements = await this.announcementsRepository.findAndCount({
+      where: query,
+      skip: (page - 1) * per_page,
+      take: per_page,
+    });
+
+    return announcements;
   }
 }
 

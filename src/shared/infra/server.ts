@@ -38,5 +38,5 @@ app.use(
 );
 
 app.listen(3333, () => {
-  console.log('Server running ✨✨✨✨✨');
+  console.info('\x1b[32m', 'Server running ✨', '\x1b[0m');
 });

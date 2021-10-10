@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { UsersAnnouncementsController } from '@modules/announcements/infra/controllers';
+import { UsersAnnouncementsController } from '@modules/announcements/infra/http/controllers';
 
 const usersAnnouncementRoutes = Router();
 
