@@ -9,13 +9,23 @@ import path from 'path';
 import { VerifyParams } from '@modules/users/infra/validation/usersValidation';
 import { deleteFile } from '@utils/deleteFile';
 
-import { ICreateUsersDTO } from '@modules/users/dtos/ICreateUsersDTO';
-import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
-import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
+import { ICreateUsersDTO } from '@modules/users/dtos';
+import {
+  IUsersRepository,
+  IUsersLogRepository,
+  IUserTokenRepository,
+} from '@modules/users/repositories';
+
 import { IMailProvider } from '@shared/infra/container/providers/mailProvider/models/IMailProvider';
-import { IUserTokenRepository } from '../repositories/IUserTokenRepository';
 
 const verifyParams = new VerifyParams();
+
+interface ICreateUserLot {
+  item: ICreateUsersDTO;
+  errors: string[];
+  index: number;
+  lot: string;
+}
 
 @injectable()
 class CreateUsersService {
@@ -32,6 +42,24 @@ class CreateUsersService {
     @inject('TokenRepository')
     private tokenRepository: IUserTokenRepository,
   ) {}
+
+  async createErrorLog({
+    item,
+    errors,
+    index,
+    lot,
+  }: ICreateUserLot): Promise<void> {
+    Object.assign(item, {
+      error:
+        item?.error && item?.error?.length
+          ? [...item.error, ...errors]
+          : errors,
+      line: index + 1,
+      lot,
+    });
+
+    await this.usersLogRepository.create(item);
+  }
 
   saveUsers(file: Express.Multer.File): Promise<ICreateUsersDTO[]> {
     return new Promise((resolve, reject) => {
@@ -92,15 +120,32 @@ class CreateUsersService {
           address,
           state,
         } = item;
+
         const errors = await verifyParams.execute(item);
 
         if (errors) {
-          Object.assign(item, {
-            error: errors,
-            line: index + 1,
-            lot,
-          });
-          await this.usersLogRepository.create(item);
+          await this.createErrorLog({ errors, lot, index, item });
+          return;
+        }
+
+        const userFoundByEmail = await this.usersRepository.findByEmail(email);
+        const userFoundByDocument = await this.usersRepository.findByDocument(
+          cnpj || cpf,
+        );
+
+        if (userFoundByEmail) {
+          const errors = ['email de usuário já cadastrado'];
+
+          await this.createErrorLog({ errors, lot, index, item });
+        }
+
+        if (userFoundByDocument) {
+          const errors = ['documento já cadastrado'];
+
+          await this.createErrorLog({ errors, lot, index, item });
+        }
+
+        if (userFoundByEmail || userFoundByDocument) {
           return;
         }
 

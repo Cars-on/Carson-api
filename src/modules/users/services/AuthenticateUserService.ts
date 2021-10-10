@@ -4,11 +4,11 @@ import { injectable, inject } from 'tsyringe';
 import authConfig from '@config/auth';
 
 import { AppError } from '@shared/errors/AppError';
-import { IUsersRepository } from '../repositories/IUserRepository';
+import { IUsersRepository } from '../repositories';
 
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
-import { IUser } from '../schemas/IUser';
+import { IUser } from '../schemas';
 
 interface IRequest {
   email: string;
@@ -53,7 +53,7 @@ class AuthenticateUserService {
     const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
-      subject: user.id,
+      subject: user.id.toString(),
       expiresIn,
     });
 

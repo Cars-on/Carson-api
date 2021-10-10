@@ -1,19 +1,18 @@
-// import { Request, Response } from 'express';
-// import { container } from 'tsyringe';
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-// import ResetPasswordService from '@modules/users/services/ResetPasswordService';
+import { ResetPasswordService } from '@modules/users/services';
 
-// export default class ResetPasswordController {
-//   public async create(request: Request, response: Response): Promise<Response> {
-//     const { password, token } = request.body;
+class ResetPasswordController {
+  public async create(request: Request, response: Response): Promise<Response> {
+    const { password, token } = request.body;
 
-//     const resetPassword = container.resolve(ResetPasswordService);
+    const resetPassword = container.resolve(ResetPasswordService);
 
-//     await resetPassword.execute({
-//       password,
-//       token,
-//     });
+    await resetPassword.execute(password, token);
 
-//     return response.json({ message: 'Your password was changed successfully' });
-//   }
-// }
+    return response.json({ message: 'Senha alterada com sucesso' });
+  }
+}
+
+export { ResetPasswordController };

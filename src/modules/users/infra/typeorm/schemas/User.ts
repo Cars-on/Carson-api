@@ -11,7 +11,7 @@ import {
   BeforeInsert,
 } from 'typeorm';
 
-import { IUser, UserRoles } from '@modules/users/schemas/IUser';
+import { IUser, UserRoles } from '@modules/users/schemas';
 
 @Entity('users')
 class User implements IUser {

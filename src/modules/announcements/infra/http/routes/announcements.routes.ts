@@ -2,7 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 
-import { AnnouncementsController } from '@modules/announcements/infra/controllers/AnnouncementsController';
+import { AnnouncementsController } from '@modules/announcements/infra/http/controllers';
 
 const announcementRoutes = Router();
 
@@ -20,12 +20,13 @@ announcementRoutes.post(
   announcementsController.create,
 );
 
-announcementRoutes.get('/', announcementsController.index);
-announcementRoutes.get('/:id', announcementsController.show);
 announcementRoutes.patch(
   '/:id',
   <any>uploadImage.array('photos'),
   announcementsController.upload,
 );
+
+announcementRoutes.get('/', announcementsController.index);
+announcementRoutes.get('/:id', announcementsController.show);
 
 export { announcementRoutes };

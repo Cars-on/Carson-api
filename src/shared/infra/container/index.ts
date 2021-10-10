@@ -3,20 +3,25 @@ import { container } from 'tsyringe';
 
 import './providers';
 
-import { IUsersRepository } from '@modules/users/repositories/IUserRepository';
-import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository';
+import {
+  IUsersRepository,
+  IUsersLogRepository,
+  IUserTokenRepository,
+} from '@modules/users/repositories';
+import {
+  UsersRepository,
+  UsersLogRepository,
+  UserTokensRepository,
+} from '@modules/users/infra/typeorm/repositories';
 
-import { IUsersLogRepository } from '@modules/users/repositories/IUserLogRepository';
-import { UsersLogRepository } from '@modules/users/infra/typeorm/repositories/UsersLogRepository';
-
-import { AnnouncementsRepository } from '@modules/announcements/infra/typeorm/repositories/AnnouncementsRepository';
-import { IAnnouncementsRepository } from '@modules/announcements/repositories/IAnnouncementsRepository';
-
-import { AnnouncementsLogsRepository } from '@modules/announcements/infra/typeorm/repositories/AnnouncementsLogsRepository';
-import { IAnnouncementsLogsRepository } from '@modules/announcements/repositories/IAnnouncementsLogsRepository';
-
-import { IUserTokenRepository } from '@modules/users/repositories/IUserTokenRepository';
-import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UsersTokenRepository';
+import {
+  AnnouncementsRepository,
+  AnnouncementsLogsRepository,
+} from '@modules/announcements/infra/typeorm/repositories';
+import {
+  IAnnouncementsRepository,
+  IAnnouncementsLogsRepository,
+} from '@modules/announcements/repositories';
 
 import { IHashProvider } from '@modules/users/providers/HashProvider/models/IHashProvider';
 import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider';

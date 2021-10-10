@@ -1,7 +1,7 @@
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
-import { IAnnouncementsRepository } from '../repositories/IAnnouncementsRepository';
+import { IAnnouncementsRepository } from '../repositories';
 
 @injectable()
 class UploadPhotosService {
@@ -22,7 +22,8 @@ class UploadPhotosService {
     const announcementPhoto: any = [];
 
     photos.map(async photo => {
-      announcementPhoto.push(photo.path);
+      // console.log(photo.originalname.replaceAll(' ', ''));
+      announcementPhoto.push(`http://localhost:3333/files/${photo.filename}`);
     });
 
     await this.announcementsRepository.sevePhoto(id, announcementPhoto);

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { GetAnnouncementsLogsService } from '@modules/announcements/services/GetAnnouncementsLogsService';
+import { GetAnnouncementsLogsService } from '@modules/announcements/services';
 
 class AnnouncementsLogsController {
   public async index(request: Request, response: Response): Promise<Response> {
