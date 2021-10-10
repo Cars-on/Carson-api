@@ -1,8 +1,8 @@
+import { IUserTokenRepository } from '@modules/users/repositories/IUserTokenRepository';
+import { IUserToken } from '@modules/users/schemas/IUserToken';
 import { getMongoRepository, MongoRepository } from 'typeorm';
-
-import { IUserTokenRepository } from '@modules/users/repositories';
-import { IUserToken } from '@modules/users/schemas';
-import { UserToken } from '../schemas';
+// import { User } from '../schemas/User';
+import { UserToken } from '../schemas/UserToeken';
 
 class UserTokensRepository implements IUserTokenRepository {
   private usersTokenRepository: MongoRepository<UserToken>;
@@ -23,7 +23,6 @@ class UserTokensRepository implements IUserTokenRepository {
   }
 
   public async findByToken(token: string): Promise<IUserToken | undefined> {
-    console.log(token);
     return await this.usersTokenRepository.findOne({ where: { token } });
   }
 }

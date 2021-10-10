@@ -10,6 +10,7 @@ import {
   announcementRoutes,
   AnnouncementsLogsRoutes,
   usersAnnouncementRoutes,
+  announcementFilterRoutes,
 } from '@modules/announcements/infra/http/routes';
 
 const routes = Router();
@@ -21,5 +22,6 @@ routes.use('/password', passwordRouter);
 routes.use('/announcements', announcementRoutes);
 routes.use('/announcements-logs', AnnouncementsLogsRoutes);
 routes.use('/announcements-users', usersAnnouncementRoutes);
+routes.use('/announcements-filter', announcementFilterRoutes);
 
 export { routes };

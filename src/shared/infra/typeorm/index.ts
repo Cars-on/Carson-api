@@ -1,12 +1,11 @@
 import { createConnection } from 'typeorm';
 
-// eslint-disable-next-line no-unused-expressions
 (async () => {
   createConnection()
     .then(() => {
-      console.log('Database connected ✨✨✨✨');
+      console.info('\x1b[32m', 'Database connected ✨', '\x1b[0m');
     })
     .catch(err => {
-      console.log('Database not connected ❌❌❌❌ ', err);
+      console.info('\x1b[33m', 'Database not connected ❌ ', err, '\x1b[0m');
     });
 })();
