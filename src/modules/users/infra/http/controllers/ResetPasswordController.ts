@@ -11,7 +11,7 @@ class ResetPasswordController {
 
     await resetPassword.execute(password, token);
 
-    return response.json({ message: 'Your password was changed successfully' });
+    return response.json({ message: 'Senha alterada com sucesso' });
   }
 }
 
