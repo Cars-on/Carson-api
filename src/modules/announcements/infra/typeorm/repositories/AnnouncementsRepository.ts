@@ -112,6 +112,26 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
 
     return announcements;
   }
+
+  public async findAllByUserDocument(
+    document: string,
+    page = 1,
+    per_page = 12,
+  ): Promise<[IAnnouncement[], number]> {
+    if (document.length > 11) {
+      return await this.announcementsRepository.findAndCount({
+        where: { cnpj: document },
+        skip: (page - 1) * per_page,
+        take: per_page,
+      });
+    }
+
+    return await this.announcementsRepository.findAndCount({
+      where: { cpf: document },
+      skip: (page - 1) * per_page,
+      take: per_page,
+    });
+  }
 }
 
 export { AnnouncementsRepository };
