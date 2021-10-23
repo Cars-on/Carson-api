@@ -1,9 +1,29 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { GetAnnouncementByUserIdService } from '@modules/announcements/services';
+import {
+  GetAnnouncementByUserIdService,
+  GetAllUserAnnouncementsService,
+} from '@modules/announcements/services';
 
 class UsersAnnouncementsController {
+  public async index(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+    const { page, per_page } = request.query;
+
+    const getUserAnnouncementsService = container.resolve(
+      GetAllUserAnnouncementsService,
+    );
+
+    const announcements = await getUserAnnouncementsService.execute({
+      user_id,
+      page: Number(page) || 1,
+      per_page: Number(per_page) || 12,
+    });
+
+    return response.send(announcements);
+  }
+
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 

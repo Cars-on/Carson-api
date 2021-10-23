@@ -22,7 +22,6 @@ class UploadPhotosService {
     const announcementPhoto: any = [];
 
     photos.map(async photo => {
-      // console.log(photo.originalname.replaceAll(' ', ''));
       announcementPhoto.push(`http://localhost:3333/files/${photo.filename}`);
     });
 
