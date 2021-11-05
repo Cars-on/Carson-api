@@ -142,6 +142,12 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
       take: per_page,
     });
   }
+
+  public async delete(announcement_id: string): Promise<void> {
+    await this.announcementsRepository.deleteOne({
+      _id: new ObjectID(announcement_id),
+    });
+  }
 }
 
 export { AnnouncementsRepository };

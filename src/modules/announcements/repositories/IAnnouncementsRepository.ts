@@ -16,6 +16,7 @@ interface IAnnouncementsRepository {
   ): Promise<[IAnnouncement[], number]>;
   sevePhoto(id: string, photos: string[]): Promise<void>;
   filter(params: IQueryParamsDTO): Promise<[IAnnouncement[], number]>;
+  delete(announcement_id: string): Promise<void>;
 }
 
 export { IAnnouncementsRepository };

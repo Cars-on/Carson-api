@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import {
   GetAnnouncementByUserIdService,
   GetAllUserAnnouncementsService,
+  DeleteUserAnnouncementsService,
 } from '@modules/announcements/services';
 
 class UsersAnnouncementsController {
@@ -34,6 +35,22 @@ class UsersAnnouncementsController {
     const announcement = await getAnnouncementByUserIdService.execute(id);
 
     return response.json(announcement);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+    const { announcement_id } = request.params;
+
+    const deleteUserAnnouncementsService = container.resolve(
+      DeleteUserAnnouncementsService,
+    );
+
+    await deleteUserAnnouncementsService.execute({
+      user_id,
+      announcement_id,
+    });
+
+    return response.json({ message: 'Anúncio deletado' });
   }
 }
 
