@@ -34,9 +34,19 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
   }
 
   public async findById(id: string): Promise<IAnnouncement | undefined> {
-    return await this.announcementsRepository.findOne({
+    const findAnnouncement = await this.announcementsRepository.findOne({
       where: { _id: new ObjectID(id) },
     });
+
+    if (findAnnouncement) {
+      findAnnouncement.viewed += 1;
+
+      const announcement = await this.announcementsRepository.save(
+        findAnnouncement,
+      );
+      return announcement;
+    }
+    return findAnnouncement;
   }
 
   public async findByUserId(id: string): Promise<IAnnouncement | undefined> {
