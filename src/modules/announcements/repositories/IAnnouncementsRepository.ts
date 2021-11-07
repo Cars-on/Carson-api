@@ -1,6 +1,7 @@
 import {
   IQueryParamsDTO,
   ICreateAnnouncementsDTO,
+  IUpdateAnnouncementsDTO,
 } from '@modules/announcements/dtos';
 import { IAnnouncement } from '../schemas';
 
@@ -17,6 +18,7 @@ interface IAnnouncementsRepository {
   sevePhoto(id: string, photos: string[]): Promise<void>;
   filter(params: IQueryParamsDTO): Promise<[IAnnouncement[], number]>;
   delete(announcement_id: string): Promise<void>;
+  update(params: IUpdateAnnouncementsDTO): Promise<IAnnouncement>;
 }
 
 export { IAnnouncementsRepository };

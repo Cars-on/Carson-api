@@ -5,6 +5,7 @@ import {
   GetAnnouncementByUserIdService,
   GetAllUserAnnouncementsService,
   DeleteUserAnnouncementsService,
+  UpdateAnnouncementService,
 } from '@modules/announcements/services';
 
 class UsersAnnouncementsController {
@@ -51,6 +52,22 @@ class UsersAnnouncementsController {
     });
 
     return response.json({ message: 'Anúncio deletado' });
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const user_id = request.user.id;
+    const params = request.body;
+
+    Object.assign(params, { user_id, id });
+
+    const updateAnnouncementService = container.resolve(
+      UpdateAnnouncementService,
+    );
+
+    const announcement = await updateAnnouncementService.execute(params);
+
+    return response.json(announcement);
   }
 }
 

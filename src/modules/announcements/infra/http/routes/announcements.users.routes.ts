@@ -16,9 +16,12 @@ usersAnnouncementRoutes.get(
   usersAnnouncementsController.index,
 );
 usersAnnouncementRoutes.get('/:id', usersAnnouncementsController.show);
+
 usersAnnouncementRoutes.delete(
   '/:announcement_id',
   usersAnnouncementsController.delete,
 );
+
+usersAnnouncementRoutes.put('/:id', usersAnnouncementsController.update);
 
 export { usersAnnouncementRoutes };

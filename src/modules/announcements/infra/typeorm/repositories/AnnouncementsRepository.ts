@@ -1,6 +1,7 @@
 import {
   ICreateAnnouncementsDTO,
   IQueryParamsDTO,
+  IUpdateAnnouncementsDTO,
 } from '@modules/announcements/dtos';
 import { IAnnouncementsRepository } from '@modules/announcements/repositories';
 import { IAnnouncement } from '@modules/announcements/schemas';
@@ -147,6 +148,23 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
     await this.announcementsRepository.deleteOne({
       _id: new ObjectID(announcement_id),
     });
+  }
+
+  public async update(params: IUpdateAnnouncementsDTO): Promise<any> {
+    await this.announcementsRepository.updateOne(
+      {
+        _id: new ObjectID(params.id),
+      },
+      {
+        $set: { ...params },
+      },
+    );
+
+    const updatedAnnouncement = await this.announcementsRepository.findOne(
+      params.id,
+    );
+
+    return updatedAnnouncement;
   }
 }
 

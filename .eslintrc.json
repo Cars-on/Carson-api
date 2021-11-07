@@ -25,6 +25,7 @@
   "rules": {
     "import/prefer-default-export": "off",
     "no-return-await": "off",
+    "no-param-reassign": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
