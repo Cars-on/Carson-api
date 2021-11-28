@@ -52,6 +52,9 @@ class Announcement implements IAnnouncement {
   @Column('varchar')
   photos: string[];
 
+  @Column()
+  viewed: number;
+
   @CreateDateColumn()
   created_at: Date;
 

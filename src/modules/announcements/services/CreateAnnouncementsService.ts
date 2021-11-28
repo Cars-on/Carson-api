@@ -134,6 +134,7 @@ class CreateAnnouncementsService {
           price,
           description,
           lot,
+          viewed: 0,
         });
       }
     });

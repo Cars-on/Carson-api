@@ -1,6 +1,7 @@
 import {
   ICreateAnnouncementsDTO,
   IQueryParamsDTO,
+  IUpdateAnnouncementsDTO,
 } from '@modules/announcements/dtos';
 import { IAnnouncementsRepository } from '@modules/announcements/repositories';
 import { IAnnouncement } from '@modules/announcements/schemas';
@@ -34,9 +35,19 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
   }
 
   public async findById(id: string): Promise<IAnnouncement | undefined> {
-    return await this.announcementsRepository.findOne({
+    const findAnnouncement = await this.announcementsRepository.findOne({
       where: { _id: new ObjectID(id) },
     });
+
+    if (findAnnouncement) {
+      findAnnouncement.viewed += 1;
+
+      const announcement = await this.announcementsRepository.save(
+        findAnnouncement,
+      );
+      return announcement;
+    }
+    return findAnnouncement;
   }
 
   public async findByUserId(id: string): Promise<IAnnouncement | undefined> {
@@ -111,6 +122,49 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
     });
 
     return announcements;
+  }
+
+  public async findAllByUserDocument(
+    document: string,
+    page = 1,
+    per_page = 12,
+  ): Promise<[IAnnouncement[], number]> {
+    if (document.length > 11) {
+      return await this.announcementsRepository.findAndCount({
+        where: { cnpj: document },
+        skip: (page - 1) * per_page,
+        take: per_page,
+      });
+    }
+
+    return await this.announcementsRepository.findAndCount({
+      where: { cpf: document },
+      skip: (page - 1) * per_page,
+      take: per_page,
+    });
+  }
+
+  public async delete(announcement_id: string): Promise<void> {
+    await this.announcementsRepository.deleteOne({
+      _id: new ObjectID(announcement_id),
+    });
+  }
+
+  public async update(params: IUpdateAnnouncementsDTO): Promise<any> {
+    await this.announcementsRepository.updateOne(
+      {
+        _id: new ObjectID(params.id),
+      },
+      {
+        $set: { ...params },
+      },
+    );
+
+    const updatedAnnouncement = await this.announcementsRepository.findOne(
+      params.id,
+    );
+
+    return updatedAnnouncement;
   }
 }
 

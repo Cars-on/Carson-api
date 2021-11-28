@@ -5,3 +5,6 @@ export * from './GetAnnouncementsLogsService';
 export * from './GetAnnouncementsService';
 export * from './UploadPhotosService';
 export * from './FilternnouncementsService';
+export * from './GetAllUserAnnouncementsService';
+export * from './DeleteUserAnnouncementsService';
+export * from './UpdateAnnouncementService';

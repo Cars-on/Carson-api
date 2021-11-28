@@ -15,6 +15,7 @@ interface IAnnouncement {
   description: string;
   lot: string;
   photos?: string[];
+  viewed: number;
 }
 
 export { IAnnouncement };

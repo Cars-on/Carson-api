@@ -11,4 +11,5 @@ export interface ICreateAnnouncementsDTO {
   price: string;
   description?: string;
   lot?: string;
+  viewed?: number;
 }
