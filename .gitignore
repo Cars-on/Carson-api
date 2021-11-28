@@ -6,6 +6,3 @@ dist/
 
 tmp/*
 !tmp/.gitkeep
-
-yarn-error.log
-yarn.lock
