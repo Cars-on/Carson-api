@@ -1,8 +1,8 @@
 node_modules/
 .docker/
 .vscode/
-ormconfig.js
 .env
+dist/
 
 tmp/*
 !tmp/.gitkeep
