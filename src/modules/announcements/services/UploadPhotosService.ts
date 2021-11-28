@@ -22,7 +22,7 @@ class UploadPhotosService {
     const announcementPhoto: any = [];
 
     photos.map(async photo => {
-      announcementPhoto.push(`http://localhost:3333/files/${photo.filename}`);
+      announcementPhoto.push(`${process.env.APP_URL}files/${photo.filename}`);
     });
 
     await this.announcementsRepository.sevePhoto(id, announcementPhoto);
