@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "ci": "yarn install --frozen-lockfile"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
