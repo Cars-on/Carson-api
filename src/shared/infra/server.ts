@@ -40,6 +40,6 @@ app.use(
   },
 );
 
-app.listen(3333, () => {
+app.listen(process.env.PORT || 3333, () => {
   console.info('\x1b[32m', 'Server running ✨', '\x1b[0m');
 });
