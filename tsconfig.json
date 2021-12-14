@@ -1,24 +1,25 @@
 {
   "compilerOptions": {
-    "resolveJsonModule": true,
     "target": "es5",
     "module": "commonjs",
     "allowJs": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "strictPropertyInitialization": false,
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["./modules/*"],
-      "@shared/*": ["./shared/*"],
-      "@config/*": ["./config/*"],
-      "@utils/*": ["./utils/*"]
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@utils/*": ["utils/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false
   }
 }

@@ -19,6 +19,7 @@ interface IAnnouncementsRepository {
   filter(params: IQueryParamsDTO): Promise<[IAnnouncement[], number]>;
   delete(announcement_id: string): Promise<void>;
   update(params: IUpdateAnnouncementsDTO): Promise<IAnnouncement>;
+  findAllByUserId(id: string): Promise<IAnnouncement[] | undefined>;
 }
 
 export { IAnnouncementsRepository };

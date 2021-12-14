@@ -39,6 +39,8 @@
     "class-methods-use-this": "off",
     "camelcase": "off",
     "no-useless-constructor": "off",
+    "no-await-in-loop": "off",
+    "no-restricted-syntax": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

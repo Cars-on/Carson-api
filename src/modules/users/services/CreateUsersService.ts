@@ -72,16 +72,8 @@ class CreateUsersService {
 
       parseFile
         .on('data', async line => {
-          const [
-            cnpj,
-            cpf,
-            name,
-            user_name,
-            email,
-            phone,
-            address,
-            state,
-          ] = line;
+          const [cnpj, cpf, name, user_name, email, phone, address, state] =
+            line;
 
           users.push({
             cnpj,
@@ -110,16 +102,8 @@ class CreateUsersService {
 
     users.map(async (item, index) => {
       if (index !== 0) {
-        const {
-          cnpj,
-          cpf,
-          name,
-          user_name,
-          email,
-          phone,
-          address,
-          state,
-        } = item;
+        const { cnpj, cpf, name, user_name, email, phone, address, state } =
+          item;
 
         const errors = await verifyParams.execute(item);
 

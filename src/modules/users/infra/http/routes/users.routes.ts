@@ -13,6 +13,8 @@ const upload = multer({
 
 userRoutes.post('/import', <any>upload.single('file'), usersController.upload);
 
+userRoutes.delete('/:id', usersController.delete);
+
 userRoutes.get('/', usersController.index);
 
 export { userRoutes };
