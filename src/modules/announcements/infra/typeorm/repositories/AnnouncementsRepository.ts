@@ -144,6 +144,14 @@ class AnnouncementsRepository implements IAnnouncementsRepository {
     });
   }
 
+  public async findAllByUserId(
+    id: string,
+  ): Promise<IAnnouncement[] | undefined> {
+    return await this.announcementsRepository.find({
+      where: { user_id: new ObjectID(id) },
+    });
+  }
+
   public async delete(announcement_id: string): Promise<void> {
     await this.announcementsRepository.deleteOne({
       _id: new ObjectID(announcement_id),
